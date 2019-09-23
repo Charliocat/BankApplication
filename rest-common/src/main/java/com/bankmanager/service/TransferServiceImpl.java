@@ -35,7 +35,7 @@ public class TransferServiceImpl implements TransferService {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("Transfer Done", HttpStatus.OK);
+        return new ResponseEntity<>("Transaction Done", HttpStatus.OK);
     }
 
 }

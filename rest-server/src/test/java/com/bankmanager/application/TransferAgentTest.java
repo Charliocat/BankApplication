@@ -37,6 +37,23 @@ class TransferAgentTest {
         assertTrue(response.getBody().equals("Failed Transaction!"));
     }
 
+    @Test
+    public void testSuccessfulTransaction() {
+
+        TransferJson transferJson = new TransferJson();
+        transferJson.setFromAccountId(new AccountId("BBVA", "1234567890"));
+        transferJson.setToAccountId(new AccountId("BBVA", "1233211233"));
+        transferJson.setAmount(10.00);
+
+        HttpEntity<TransferJson> entity = new HttpEntity<>(transferJson, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/transfer-agent/transfer"),
+                HttpMethod.POST, entity, String.class);
+
+        assertTrue(response.getBody().equals("Transaction Done"));
+    }
+
     private String createURLWithPort(String uri) {
         return "http://localhost:" + 8080 + uri;
     }
